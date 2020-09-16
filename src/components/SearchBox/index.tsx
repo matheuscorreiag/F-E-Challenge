@@ -4,38 +4,61 @@ import LocationSearchingIcon from "@material-ui/icons/LocationSearching";
 import { Map, TileLayer, Marker } from "react-leaflet";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Add from "@material-ui/icons/Add";
+import Send from "@material-ui/icons/Send";
+
 import data from "../../data/neighborhoods.json";
 import "./styles.scss";
 import "../../common.scss";
 
 const SearchBox: React.FC = () => {
-  const [activeNeighbors, setActiveNeighbors] = useState(null);
   const initialPosition = [-7.163, -34.879];
   const [modalShow, setModalShow] = React.useState(false);
+  const [inputMessage, setInputMessage] = React.useState(false);
 
   function MyVerticallyCenteredModal(props) {
     return (
       <Modal
+        id="modal"
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </p>
+        <Modal.Body className="placeholder">
+          {!inputMessage && (
+            <>
+              <h1> Mande uma mensagem para o seu bairro</h1>
+            </>
+          )}
+          {inputMessage && (
+            <>
+              <label> Quais melhorias você acha necessárias no bairro?</label>
+              <div className="textarea-container">
+                <textarea placeholder="Digite aqui sua mensagem"></textarea>
+              </div>
+              <Button variant="primary">Enviar</Button>
+            </>
+          )}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button
+            id="new-message"
+            onClick={() => {
+              setInputMessage(true);
+            }}
+          >
+            Nova mensagem
+            <Add />
+          </Button>
+          <Button
+            onClick={() => {
+              props.onHide();
+              setInputMessage(false);
+            }}
+          >
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
     );

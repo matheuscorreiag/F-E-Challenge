@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import "./styles.scss";
+import "../../common.scss";
 
 function NavbarOverlay() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -20,21 +21,23 @@ function NavbarOverlay() {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Entrar na sua conta
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Label>E-mail</Form.Label>
+              <Form.Control type="email" placeholder="Digite seu e-mail" />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Label>Senha</Form.Label>
+              <Form.Control type="password" placeholder="Digite sua senha" />
             </Form.Group>
             <Button variant="primary" type="submit">
-              Entre
+              Entrar
             </Button>
           </Form>
         </Modal.Body>

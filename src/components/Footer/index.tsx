@@ -2,6 +2,7 @@ import React from "react";
 
 // import { Container } from './styles';
 import "./styles.scss";
+import "../../common.scss";
 
 const Footer: React.FC = () => {
   return (

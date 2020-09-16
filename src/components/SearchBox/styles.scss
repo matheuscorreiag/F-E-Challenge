@@ -43,3 +43,37 @@
   height: 100%;
   border-radius: 14px;
 }
+.modal-content {
+  height: 500px !important;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    line-height: 400px;
+  }
+  textarea {
+    resize: none;
+    height: 250px;
+    width: 100%;
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  label {
+    padding-top: 3.5%;
+    font-weight: bold;
+  }
+}
+.textarea-container {
+  width: 100%;
+  padding-bottom: 20px;
+}
+.modal-body.placeholder {
+  ::-webkit-input-placeholder {
+    line-height: 250px;
+    text-align: center;
+  }
+}

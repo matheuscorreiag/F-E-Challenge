@@ -12,6 +12,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noImplicitAny": false,
+    "strictNullChecks": false,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react"

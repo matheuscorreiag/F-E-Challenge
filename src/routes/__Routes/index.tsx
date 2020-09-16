@@ -1,11 +1,15 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import ExampleExample from "../../containers/ExampleExample";
+import LandingPage from "../../containers/LandingPage";
+import MapView from "../../containers/MapView";
+import About from "../../containers/About";
 
 export default function Routes() {
   return (
     <Switch>
-      <Route exact path="/" component={ExampleExample} />
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/maps" component={MapView} />
+      <Route exact path="/about" component={About} />
     </Switch>
   );
 }
