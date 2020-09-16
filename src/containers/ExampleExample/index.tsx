@@ -1,9 +1,18 @@
-import React from 'react';
+import React from "react";
+import Footer from "../../components/Footer";
+import NavbarOverlay from "../../components/NavBar";
 
-import Example from '../../components/Example';
+import NavBar from "../../components/NavBar";
+import SearchBox from "../../components/SearchBox";
 
-const ExampleExample: React.FC = () => {
-  return <Example />;
-}
+const Index: React.FC = () => {
+  return (
+    <>
+      <NavbarOverlay />
+      <SearchBox />
+      <Footer />
+    </>
+  );
+};
 
-export default ExampleExample;
+export default Index;
