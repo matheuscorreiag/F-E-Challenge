@@ -13,7 +13,6 @@ img {
   flex-direction: row;
   min-width: 80%;
 }
-
 .navbar {
   width: 99%;
   border-radius: 14px !important;
@@ -36,19 +35,13 @@ img {
 }
 .navbar-brand {
   padding-left: 10px;
-} /* 
-.navbar-collapse {
-  align-items: flex-end !important;
-} */
-.navbar a {
-  color: red;
-}
-.navbar a:hover {
-  color: firebrick;
 }
 .btn-primary {
   background-color: #d43b3b !important;
   border: none !important;
+}
+.btn-primary:hover {
+  background-color: #d22a2a !important;
 }
 @media (min-width: 320px) and (max-width: 342px) {
   img {
