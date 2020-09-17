@@ -27,12 +27,12 @@ function NavbarOverlay() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group controlId="formBasicEmail" className="login-align">
               <Form.Label>E-mail</Form.Label>
               <Form.Control type="email" placeholder="Digite seu e-mail" />
             </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
+            <Form.Group controlId="formBasicPassword" className="login-align">
               <Form.Label>Senha</Form.Label>
               <Form.Control type="password" placeholder="Digite sua senha" />
             </Form.Group>

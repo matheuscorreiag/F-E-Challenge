@@ -47,10 +47,11 @@ img {
   label {
     padding-right: 2%;
   }
+}
+.login-align {
   display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  white-space: pre;
+  flex-direction: column !important;
+  white-space: pre !important;
 }
 .button-login {
   float: right;

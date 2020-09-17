@@ -1,14 +1,20 @@
+.search-title {
+  padding: 1% 1% 0 0;
+  h1 {
+    text-align: inherit;
+    font-size: 1rem;
+  }
+}
 .search-container {
-  padding-top: 3%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
-  padding-bottom: 100px;
 }
 .input-button {
-  padding-bottom: 2%;
+  padding-bottom: 1%;
+  width: 100%;
 
   input {
     width: 50vw !important;
@@ -42,13 +48,27 @@
 .modal-content {
   height: 500px !important;
 }
+.modal-page1 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100%;
+}
 .modal-body {
   display: flex;
   flex-direction: column;
+  padding: 15px 20px !important;
+  form {
+    width: 100%;
+    height: 500px;
+    input {
+      height: 50px;
+    }
+  }
+
   h1 {
     font-size: 2rem;
     text-align: center;
-    line-height: 400px;
   }
   textarea {
     resize: none;
@@ -58,6 +78,7 @@
     border-radius: 5px;
     overflow: hidden;
   }
+
   label {
     padding-top: 3.5%;
     font-weight: bold;
@@ -66,17 +87,21 @@
 .textarea-container {
   width: 100%;
   padding-bottom: 20px;
-}
+
+  ::-webkit-input-placeholder {
+    /* Webkit */
+    line-height: 250px;
+    text-align: center;
+  }
+} /* 
 .modal-body.placeholder {
   ::-webkit-input-placeholder {
     line-height: 250px;
     text-align: center;
   }
-}
+} */
 .form-group {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   .img-search {
     padding-right: 5px;
   }
@@ -88,4 +113,23 @@
 }
 .custom-select {
   width: 300px !important;
+}
+.neighbors-buttons {
+  width: 100px !important;
+  padding: 5px 10px !important;
+  font-size: 0.65rem !important;
+}
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  button {
+    margin: 2px;
+  }
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.search-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
