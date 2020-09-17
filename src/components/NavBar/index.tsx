@@ -10,7 +10,7 @@ import "./styles.scss";
 import "../../common.scss";
 
 function NavbarOverlay() {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -36,14 +36,13 @@ function NavbarOverlay() {
               <Form.Label>Senha</Form.Label>
               <Form.Control type="password" placeholder="Digite sua senha" />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Entrar
-            </Button>
+            <div className="button-login">
+              <Button variant="primary" type="submit">
+                Entrar
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     );
   }

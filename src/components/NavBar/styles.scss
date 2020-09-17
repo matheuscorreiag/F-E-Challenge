@@ -43,6 +43,24 @@ img {
 .btn-primary:hover {
   background-color: #d22a2a !important;
 }
+.form-group {
+  label {
+    padding-right: 2%;
+  }
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: pre;
+}
+.button-login {
+  float: right;
+}
+.modal-body {
+  padding: 50px 50px !important;
+}
+.form-control {
+  width: 100% !important;
+}
 @media (min-width: 320px) and (max-width: 342px) {
   img {
     height: 40px;

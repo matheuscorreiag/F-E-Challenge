@@ -8,7 +8,7 @@
   padding-bottom: 100px;
 }
 .input-button {
-  padding-bottom: 5%;
+  padding-bottom: 2%;
 
   input {
     width: 50vw !important;
@@ -20,7 +20,6 @@
   }
 }
 .input-button button {
-  background-color: #d43b3b;
   height: 5vh;
   width: 60px;
   border-radius: 0px 15px 15px 0px;
@@ -76,4 +75,20 @@
     line-height: 250px;
     text-align: center;
   }
+}
+.form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .img-search {
+    padding-right: 5px;
+  }
+
+  svg {
+    filter: invert(35%) sepia(57%) saturate(1849%) hue-rotate(335deg)
+      brightness(87%) contrast(89%);
+  }
+}
+.custom-select {
+  width: 300px !important;
 }
