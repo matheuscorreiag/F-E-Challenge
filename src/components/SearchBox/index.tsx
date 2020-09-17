@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import LocationSearchingIcon from "@material-ui/icons/LocationSearching";
 import { Map, TileLayer, Marker } from "react-leaflet";
@@ -18,6 +18,8 @@ const SearchBox: React.FC = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [inputMessage, setInputMessage] = React.useState(false);
   const [zone, setZone] = useState(0);
+  const [zoneSelected, setZoneSelected] = useState(0);
+  const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
 
   interface Neighborhoods {
     zone: number;
@@ -28,6 +30,19 @@ const SearchBox: React.FC = () => {
     name: string;
     location: [number, number];
   }
+
+  const searchZone = () => {
+    data.map((item: Neighborhoods) => {
+      if (item.zone === zone) {
+        setNeighborhoods(item.neighborhood);
+      } else if (0 === zone) {
+        setNeighborhoods([]);
+      }
+    });
+  };
+  useEffect(() => {
+    searchZone();
+  }, [zone]);
 
   function MyVerticallyCenteredModal(props) {
     return (
@@ -93,28 +108,27 @@ const SearchBox: React.FC = () => {
                 <option value={0}> Selecione uma zona</option>
 
                 {data.map((item: Neighborhoods) => (
-                  <option key={item.zone} value={item.zone}>
-                    {`Zona ${item.zone}`}
-                    {/* {item.neighborhood.map((text: Neighborhood) => text.name) +
-                      ","} */}
-                  </option>
+                  <>
+                    <option key={item.zone} value={item.zone}>
+                      {`Zona ${item.zone}`}
+                    </option>
+                  </>
                 ))}
-                {/*   <option value="1">Zona 1</option>
-                <option value="2">Zona 2</option>
-                <option value="3">Zona 3</option>
-                <option value="4">Zona 4</option>
-                <option value="5">Zona 5</option>
-                <option value="6">Zona 6</option>
-                <option value="7">Zona 7</option>
-                <option value="8">Zona 8</option>
-                <option value="9">Zona 9</option>
-                <option value="10">Zona 10</option>
-                <option value="11">Zona 11</option>
-                <option value="12">Zona 12</option>
-                <option value="13">Zona 13</option>
-                <option value="14">Zona 14</option> */}
               </Form.Control>
             </Form.Group>
+            {zone > 0 && (
+              <>
+                {data.map((item: Neighborhoods) => (
+                  <>
+                    {item.neighborhood.map((neighbors: Neighborhood) => (
+                      <>
+                        <Button variant="primary">{neighbors.name}</Button>
+                      </>
+                    ))}
+                  </>
+                ))}
+              </>
+            )}
           </Form>
         </div>
         <div className="map">
