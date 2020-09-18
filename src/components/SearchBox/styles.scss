@@ -136,7 +136,11 @@
   padding-bottom: 50px;
 }
 .showMessage {
-  p {
-    font-weight: bold;
+  font-weight: bold;
+
+  span {
+    font-weight: normal;
+    max-height: 500px !important;
+    overflow: auto !important;
   }
 }
