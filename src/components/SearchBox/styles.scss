@@ -29,10 +29,10 @@
   height: 5vh;
   width: 60px;
   border: none;
-}
+} /* 
 .input-button button:hover {
   background-color: #d22a2a;
-}
+} */
 .input-button button svg {
   color: #fff;
 }
@@ -46,7 +46,7 @@
   border-radius: 14px;
 }
 .modal-content {
-  height: 500px !important;
+  overflow: auto;
 }
 .modal-page1 {
   display: flex !important;
@@ -83,16 +83,6 @@
     padding-top: 3.5%;
     font-weight: bold;
   }
-}
-.textarea-container {
-  width: 100%;
-  padding-bottom: 20px;
-
-  ::-webkit-input-placeholder {
-    /* Webkit */
-    line-height: 250px;
-    text-align: center;
-  }
 } /* 
 .modal-body.placeholder {
   ::-webkit-input-placeholder {
@@ -100,6 +90,10 @@
     text-align: center;
   }
 } */
+.messageInput {
+  width: 100% !important;
+  height: 250px !important;
+}
 .form-group {
   display: flex;
   .img-search {
@@ -132,4 +126,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.messageCard {
+  width: 100% !important;
+}
+.messageData {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+}
+.showMessage {
+  p {
+    font-weight: bold;
+  }
 }

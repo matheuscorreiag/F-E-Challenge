@@ -19,12 +19,18 @@ const SearchBox: React.FC = () => {
   const initialPosition = [-7.163, -34.879];
   const data = db.neighborhoods;
   const [modalShow, setModalShow] = useState(false);
-  const [inputMessage, setInputMessage] = useState(false);
+
   const [zone, setZone] = useState(0);
   const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
   const [bairro, setBairro] = useState("");
   const [message, setMessage] = useState("");
-  const [test, setTest] = useState("");
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [showMessage, setShowMessage] = useState(false);
+  const handleCloseMessage = () => setShowMessage(false);
+  const handleShowMessage = () => setShowMessage(true);
 
   interface Neighborhoods {
     zone: number;
@@ -52,27 +58,32 @@ const SearchBox: React.FC = () => {
   function messageUpdate() {
     const messageInput = localStorage.getItem("@matheus-app/message");
     setMessage(messageInput);
-  }
+  } /* 
   function messageModal() {
+    handleShowMessage();
     return (
       <>
-        <Modal.Dialog>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal title</Modal.Title>
-          </Modal.Header>
+        <Modal show={showMessage} onHide={handleCloseMessage}>
+          <Modal.Dialog>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal title</Modal.Title>
+            </Modal.Header>
 
-          <Modal.Body>
-            <p>{message}</p>
-          </Modal.Body>
+            <Modal.Body>
+              <p>{message}</p>
+            </Modal.Body>
 
-          <Modal.Footer>
-            <Button variant="secondary">Close</Button>
-            <Button variant="primary">Save changes</Button>
-          </Modal.Footer>
-        </Modal.Dialog>
+            <Modal.Footer>
+              <Button onClick={handleClose} variant="secondary">
+                Close
+              </Button>
+              <Button variant="primary">Save changes</Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </Modal>
       </>
     );
-  }
+  } */
   /*
   function messageUpdate(e) {
     e.preventDefault();
@@ -147,48 +158,85 @@ const SearchBox: React.FC = () => {
     );
   } */
   function MyVerticallyCenteredModal(props) {
+    const sendMessage = (e) => {
+      e.preventDefault();
+      handleShowMessage();
+      handleClose();
+      messageUpdate();
+      /* 
+      messageModal(); */
+    };
     return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            {message}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <InputGroup
-            className="mb-3"
-            onChange={(e) =>
-              localStorage.setItem("@matheus-app/message", e.target.value)
-            }
-          >
-            <InputGroup.Prepend>
-              <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-            </InputGroup.Prepend>
-            <FormControl
-              placeholder="Username"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-            />
-          </InputGroup>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            id="new-message"
-            onClick={() => {
+      <>
+        <Modal
+          {...props}
+          show={show}
+          onHide={handleClose}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header style={{ fontWeight: "bold" }}>{bairro}</Modal.Header>
+          <Modal.Body>
+            <InputGroup
+              className="mb-3"
+              onChange={(e) =>
+                localStorage.setItem("@matheus-app/message", e.target.value)
+              }
+            >
+              <InputGroup.Prepend>
+                <label>
+                  Quais melhorias você acha necessárias em {bairro} ?
+                </label>
+              </InputGroup.Prepend>
+              <FormControl
+                onSubmit={sendMessage}
+                as="textarea"
+                placeholder="Digite aqui sua mensagem"
+                aria-describedby="basic-addon1"
+                className="messageInput"
+              />
+            </InputGroup>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              id="new-message"
+              onClick={
+                sendMessage /* () => {
               messageUpdate();
               messageModal();
-            }}
-          >
-            Enviar
-          </Button>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+              
+            } */
+              }
+            >
+              Enviar
+            </Button>
+            <Button onClick={handleClose}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal show={showMessage} onHide={handleCloseMessage}>
+          <Modal.Dialog className="messageCard">
+            <Modal.Header closeButton className="loginHeader">
+              <Modal.Title>Mensagem Enviada!</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body className="showMessage">
+              <div className="messageData">
+                Seu bairro: {bairro}
+                <br />
+                Sua zona: {zone}
+              </div>
+              Sua mensagem:<p>{message}</p>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button onClick={handleCloseMessage} variant="secondary">
+                Fechar
+              </Button>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </Modal>
+      </>
     );
   }
   return (
@@ -233,7 +281,7 @@ const SearchBox: React.FC = () => {
                             className="neighbors-buttons"
                             variant="primary"
                             onClick={() => {
-                              setModalShow(true);
+                              handleShow();
                               setBairro(neighbors.name);
                             }}
                           >

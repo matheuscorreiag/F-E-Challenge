@@ -35,14 +35,14 @@ img {
 }
 .navbar-brand {
   padding-left: 10px;
-}
+} /* 
 .btn-primary {
   background-color: #d43b3b !important;
   border: none !important;
 }
 .btn-primary:hover {
   background-color: #d22a2a !important;
-}
+} */
 .form-group {
   label {
     padding-right: 2%;
@@ -59,8 +59,17 @@ img {
 .modal-body {
   padding: 50px 50px !important;
 }
-.form-control {
+.loginInput {
   width: 100% !important;
+  height: 50px !important;
+}
+.login {
+  height: 100% !important;
+}
+.loginHeader {
+  button {
+    background-color: #fff !important;
+  }
 }
 @media (min-width: 320px) and (max-width: 342px) {
   img {
