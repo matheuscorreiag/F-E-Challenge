@@ -7,12 +7,16 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
+import { isAuthenticated } from "../../services/auth";
+import ModalLogin from "../ModalLogin";
 
 import db from "../../data/neighborhoods.json";
 import "./styles.scss";
 import "../../common.scss";
 
 const SearchBox: React.FC = () => {
+  const auth = isAuthenticated();
+
   const initialPosition = [-7.163, -34.879];
   const data = db.neighborhoods;
   const [modalShow, setModalShow] = useState(false);
@@ -52,6 +56,11 @@ const SearchBox: React.FC = () => {
     searchZone();
   }, [zone]);
 
+  function authenticationFunction(e) {
+    /* if (auth) { }*/
+    handleShow();
+    setBairro(e);
+  }
   function messageUpdate() {
     const messageInput = localStorage.getItem("@matheus-app/message");
     setMessage(messageInput);
@@ -87,7 +96,6 @@ const SearchBox: React.FC = () => {
                 </label>
               </InputGroup.Prepend>
               <FormControl
-                onSubmit={sendMessage}
                 as="textarea"
                 placeholder="Digite aqui sua mensagem"
                 aria-describedby="basic-addon1"
@@ -99,7 +107,7 @@ const SearchBox: React.FC = () => {
             <Button id="new-message" onClick={sendMessage}>
               Enviar
             </Button>
-            <Button onClick={handleClose}>Close</Button>
+            <Button onClick={handleClose}>Fechar</Button>
           </Modal.Footer>
         </Modal>
         <Modal show={showMessage} onHide={handleCloseMessage}>
@@ -112,7 +120,11 @@ const SearchBox: React.FC = () => {
 
             <Modal.Body className="showMessage">
               <div className="messageData">
+                Usuário:
+                <br />
                 Seu bairro: {bairro}
+                <br />
+                Id do bairro:
                 <br />
                 Sua zona: {zone}
               </div>
@@ -171,8 +183,7 @@ const SearchBox: React.FC = () => {
                             className="neighbors-buttons"
                             variant="primary"
                             onClick={() => {
-                              handleShow();
-                              setBairro(neighbors.name);
+                              authenticationFunction(neighbors.name);
                             }}
                           >
                             {neighbors.name}
