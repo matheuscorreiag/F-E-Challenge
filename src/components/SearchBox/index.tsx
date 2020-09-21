@@ -2,36 +2,38 @@ import React, { useState, useEffect } from "react";
 
 import LocationSearchingIcon from "@material-ui/icons/LocationSearching";
 import { Map, TileLayer, Marker } from "react-leaflet";
-import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
 import { isAuthenticated } from "../../services/auth";
 import ModalLogin from "../ModalLogin";
 
 import db from "../../data/neighborhoods.json";
 import "./styles.scss";
 import "../../common.scss";
+import ModalMessage from "../ModalMessage";
+import ModalShowMessage from "../ModalShowMessage";
 
 const SearchBox: React.FC = () => {
   const auth = isAuthenticated();
 
   const initialPosition = [-7.163, -34.879];
   const data = db.neighborhoods;
-  const [modalShow, setModalShow] = useState(false);
 
   const [zone, setZone] = useState(0);
   const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
   const [bairro, setBairro] = useState("");
   const [message, setMessage] = useState("");
+  const [id, setId] = useState();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const [showMessage, setShowMessage] = useState(false);
   const handleCloseMessage = () => setShowMessage(false);
   const handleShowMessage = () => setShowMessage(true);
+
+  const [openModalMessage, setOpenModalMessage] = useState(false);
 
   interface Neighborhoods {
     zone: number;
@@ -57,90 +59,19 @@ const SearchBox: React.FC = () => {
   }, [zone]);
 
   function authenticationFunction(e) {
-    /* if (auth) { }*/
-    handleShow();
-    setBairro(e);
-  }
-  function messageUpdate() {
-    const messageInput = localStorage.getItem("@matheus-app/message");
-    setMessage(messageInput);
-  }
-  function MyVerticallyCenteredModal(props) {
-    const sendMessage = (e) => {
-      e.preventDefault();
+    if (auth) {
       handleShowMessage();
-      handleClose();
-      messageUpdate();
-    };
-    return (
-      <>
-        <Modal
-          {...props}
-          show={show}
-          onHide={handleClose}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <Modal.Header style={{ fontWeight: "bold" }}>{bairro}</Modal.Header>
-          <Modal.Body>
-            <InputGroup
-              className="mb-3"
-              onChange={(e) =>
-                localStorage.setItem("@matheus-app/message", e.target.value)
-              }
-            >
-              <InputGroup.Prepend>
-                <label>
-                  Quais melhorias você acha necessárias em {bairro} ?
-                </label>
-              </InputGroup.Prepend>
-              <FormControl
-                as="textarea"
-                placeholder="Digite aqui sua mensagem"
-                aria-describedby="basic-addon1"
-                className="messageInput"
-              />
-            </InputGroup>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button id="new-message" onClick={sendMessage}>
-              Enviar
-            </Button>
-            <Button onClick={handleClose}>Fechar</Button>
-          </Modal.Footer>
-        </Modal>
-        <Modal show={showMessage} onHide={handleCloseMessage}>
-          <Modal.Dialog className="messageCard">
-            <Modal.Header closeButton className="loginHeader">
-              <Modal.Title style={{ fontWeight: "bold" }}>
-                Mensagem Enviada!
-              </Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body className="showMessage">
-              <div className="messageData">
-                Usuário:
-                <br />
-                Seu bairro: {bairro}
-                <br />
-                Id do bairro:
-                <br />
-                Sua zona: {zone}
-              </div>
-              Sua mensagem:<span>{message}</span>
-            </Modal.Body>
-
-            <Modal.Footer>
-              <Button onClick={handleCloseMessage} variant="secondary">
-                Fechar
-              </Button>
-            </Modal.Footer>
-          </Modal.Dialog>
-        </Modal>
-      </>
-    );
-  }
+      setBairro(e.name);
+      setId(e.id);
+      console.log(e.id);
+    } else {
+      handleShow();
+    }
+  } /* 
+  function MyVerticallyCenteredModal(props) {
+    
+    return <></>;
+  } */
   return (
     <>
       <div className="search-title">
@@ -183,7 +114,7 @@ const SearchBox: React.FC = () => {
                             className="neighbors-buttons"
                             variant="primary"
                             onClick={() => {
-                              authenticationFunction(neighbors.name);
+                              authenticationFunction(neighbors);
                             }}
                           >
                             {neighbors.name}
@@ -210,9 +141,21 @@ const SearchBox: React.FC = () => {
                 key={markerPos.name}
               />
             ))}
-            <MyVerticallyCenteredModal
-              show={modalShow}
-              onHide={() => setModalShow(false)}
+            <ModalLogin onHide={() => setShow(false)} show={show} />;
+            <ModalMessage
+              onHide={() => setShowMessage(false)}
+              show={showMessage}
+              openModalShowMessage={() => setOpenModalMessage(true)}
+              bairro={bairro}
+              message={(e) => setMessage(e)}
+            />
+            <ModalShowMessage
+              onHide={() => setOpenModalMessage(false)}
+              show={openModalMessage}
+              bairro={bairro}
+              message={message}
+              zone={zone}
+              id={id}
             />
           </Map>
         </div>

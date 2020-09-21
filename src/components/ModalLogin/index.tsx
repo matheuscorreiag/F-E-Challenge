@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
+import { updateUser } from "../../store/ducks/user/actions";
+import { User } from "../../store/ducks/user/types";
 
 // import { Container } from './styles';
 interface Props {
@@ -10,7 +13,25 @@ interface Props {
 }
 
 const ModalLogin: React.FC<Props> = (props) => {
-  console.log(props);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const userLog: User = useSelector((state: RootStateOrAny) => state.user.user);
+
+  function authentication() {
+    const user: User = {
+      id: "1",
+      email: "matheuscorreiags@gmail.com",
+      name: "Matheus",
+      password: "12345",
+      token: "auth",
+    };
+    if (email != user.email && password != user.password) {
+      alert("Invalid email or password");
+    }
+    dispatch(updateUser({ user }));
+  }
   return (
     <Modal
       {...props}
@@ -31,6 +52,7 @@ const ModalLogin: React.FC<Props> = (props) => {
               type="email"
               placeholder="Digite seu e-mail"
               className="loginInput"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
 
@@ -40,10 +62,11 @@ const ModalLogin: React.FC<Props> = (props) => {
               type="password"
               placeholder="Digite sua senha"
               className="loginInput"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
           <div className="button-login">
-            <Button variant="primary" type="submit">
+            <Button onClick={authentication} variant="primary" type="submit">
               Entrar
             </Button>
           </div>
