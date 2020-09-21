@@ -63,7 +63,6 @@ const SearchBox: React.FC = () => {
       handleShowMessage();
       setBairro(e.name);
       setId(e.id);
-      console.log(e.id);
     } else {
       handleShow();
     }

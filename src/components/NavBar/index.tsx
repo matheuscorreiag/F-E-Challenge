@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import ModalLogin from "../ModalLogin";
@@ -14,8 +14,9 @@ function NavbarOverlay() {
   const userLog: User = useSelector((state: RootStateOrAny) => state.user.user);
   const dispatch = useDispatch();
   function userLogInOut() {
-    if (userLog.token != "") {
+    if (userLog && userLog.token !== "") {
       dispatch(removeUser());
+      window.location.reload();
     } else {
       setModalShow(true);
     }
@@ -29,8 +30,8 @@ function NavbarOverlay() {
             <Navbar.Brand href="/">JampaFinder</Navbar.Brand>
           </div>
           <Navbar.Collapse>
-            <Button variant="primary" onClick={() => userLogInOut}>
-              {userLog.token !== "" ? userLog.name : "Entrar"}
+            <Button variant="primary" onClick={userLogInOut}>
+              {userLog && userLog.token !== "" ? userLog.name : "Entrar"}
             </Button>
           </Navbar.Collapse>
         </Navbar>

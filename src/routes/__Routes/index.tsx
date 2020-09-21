@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import LandingPage from "../../containers/LandingPage";
 import MapView from "../../containers/MapView";
 import About from "../../containers/About";

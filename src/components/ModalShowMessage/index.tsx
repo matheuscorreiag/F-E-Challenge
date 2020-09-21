@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { User } from "../../store/ducks/user/types";
@@ -29,7 +29,7 @@ const ModalShowMessage: React.FC<Props> = (props) => {
 
           <Modal.Body className="showMessage">
             <div className="messageData">
-              Usuário: {userLog.name}
+              Usuário: {userLog && userLog.name}
               <br />
               Seu bairro: {props.bairro}
               <br />

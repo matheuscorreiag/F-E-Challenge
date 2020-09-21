@@ -3,10 +3,11 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
-import { LockOpen, Search } from "@material-ui/icons";
 
 import "./styles.scss";
 // import { Container } from './styles';
+
+//página principal da aplicação
 
 const Landing: React.FC = () => {
   return (

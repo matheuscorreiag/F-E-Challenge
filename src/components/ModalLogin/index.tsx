@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -12,6 +12,11 @@ interface Props {
   show: boolean;
 }
 
+//modal de login do usuário estático:
+
+//email: matheuscorreiags@gmail.com
+//password: 12345
+
 const ModalLogin: React.FC<Props> = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +25,7 @@ const ModalLogin: React.FC<Props> = (props) => {
   const userLog: User = useSelector((state: RootStateOrAny) => state.user.user);
 
   function authentication() {
+    //seta o usuário para o usuário estático
     const user: User = {
       id: "1",
       email: "matheuscorreiags@gmail.com",
@@ -27,7 +33,8 @@ const ModalLogin: React.FC<Props> = (props) => {
       password: "12345",
       token: "auth",
     };
-    if (email != user.email && password != user.password) {
+    //compara se o usuário digitado é igual ao usuário estático
+    if (email !== user.email && password !== user.password) {
       alert("Invalid email or password");
     }
     dispatch(updateUser({ user }));

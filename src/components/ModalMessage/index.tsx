@@ -3,7 +3,6 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import ModalShowMessage from "../ModalShowMessage";
 // import { Container } from './styles';
 
 interface Props {
@@ -14,16 +13,15 @@ interface Props {
   message: any;
 }
 
+//modal de envio de mensagem
+
 const ModalMessage: React.FC<Props> = (props) => {
   const [message, setMessage] = useState("");
-  const [showMessage, setShowMessage] = useState(false);
-  /* function messageUpdate() {
-     setMessage(messageInput); 
-  }  */
+
   const sendMessage = () => {
-    props.message(message);
-    props.onHide();
-    props.openModalShowMessage();
+    props.message(message); //seta mensagem
+    props.onHide(); //apaga modal de mensagem
+    props.openModalShowMessage(); //mostra modal com dados e mensagem
   };
   return (
     <>

@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import "./styles.scss";
 // import { Container } from './styles';
 
+// página sobre a aplicação e criador
+
 const About: React.FC = () => {
   return (
     <>
@@ -39,6 +41,7 @@ const About: React.FC = () => {
         <a href="https://instagram.com/matheuscorreiag">
           <img
             src={require("../../assets/images/instagram-seeklogo.com.svg")}
+            alt="instagram"
           />
         </a>
       </div>
