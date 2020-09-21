@@ -34,10 +34,11 @@ const ModalLogin: React.FC<Props> = (props) => {
       token: "auth",
     };
     //compara se o usuário digitado é igual ao usuário estático
-    if (email !== user.email && password !== user.password) {
+    if (email !== user.email || password !== user.password) {
       alert("Invalid email or password");
+    } else {
+      dispatch(updateUser({ user }));
     }
-    dispatch(updateUser({ user }));
   }
   return (
     <Modal
